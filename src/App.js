@@ -1,25 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-
+import 'antd/dist/antd.css';
+import { Layout} from 'antd'
+import Charts from './components/Charts'
+const { Content,Sider,Footer,Header } = Layout
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Layout>
+      <Header className="layout-header">自定义Echarts</Header>
+      <Layout>
+        <Content className="layout-content">
+          <Charts></Charts>
+        </Content>
+        <Sider width={400} theme="light">Sider</Sider>
+      </Layout>
+      <Footer className="layout-footer">create by weizhanzhan</Footer>
+    </Layout>
   );
 }
 
