@@ -17,3 +17,12 @@
   background: #001529 !important;
   color: #ffffff !important;
 }
+
+
+.series-item{
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eeeeee;
+  background: #eeeeee;
+  padding: 20px;
+}
