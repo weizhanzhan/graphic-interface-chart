@@ -23,6 +23,9 @@
   margin-bottom: 20px;
   padding-bottom: 20px;
   border-bottom: 1px solid #eeeeee;
-  background: #eeeeee;
-  padding: 20px;
+  /* background: #eeeeee; */
+  padding: 0 20px;
+}
+.ant-form-item{
+  margin-bottom: 14px !important;
 }

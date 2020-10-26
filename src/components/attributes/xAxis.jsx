@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Form, Input, Button} from 'antd'
+import { RetweetOutlined } from '@ant-design/icons'
 const XAxis = (props)=>{
 
   const [ xAxis,setXAxis] = useState({
@@ -26,20 +27,31 @@ const XAxis = (props)=>{
     props.setState(newState)
   }
 
+  const layout = {
+    labelCol: { span: 4 },
+    wrapperCol: { span: 20 },
+  };
+
   return(
-    <Form.Item label="X轴xAxis：" >
-      <div className="series-item">
-          <Form.Item label="name：" >
-            <Input type="text" value={xAxis.name} onChange={handleNameChange} placeholder="x轴名称"/>
-          </Form.Item>
-          <Form.Item label="data：" >
-            <Input type="text" value={xAxis.data} onChange={handleDataChange} placeholder="逗号','区分数据的集合"/>
-          </Form.Item>
-          <Button type="primary"  onClick={renderXxAixs}>
-            更新到图表
-          </Button>
-      </div>
-    </Form.Item>
+    <div>
+      <h3>xAxis:</h3>
+      <Form name="xAxis"  {...layout}  size="small"  labelAlign="left">
+        <div className="series-item">
+            <Form.Item label="name：" >
+              <Input type="text" value={xAxis.name} onChange={handleNameChange} placeholder="x轴名称"/>
+            </Form.Item>
+            <Form.Item label="data：" >
+              <Input type="text" value={xAxis.data} onChange={handleDataChange} placeholder="逗号','区分数据的集合"/>
+            </Form.Item>
+            <Form.Item label="" >
+              <Button type="primary"  onClick={renderXxAixs} icon={ <RetweetOutlined/> }>
+                更新
+              </Button>
+            </Form.Item>
+           
+        </div> 
+      </Form>
+    </div>
   )
 }
 export default XAxis

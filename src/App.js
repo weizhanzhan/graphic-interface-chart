@@ -3,7 +3,7 @@ import './App.css';
 import 'antd/dist/antd.css';
 import { Layout} from 'antd'
 import Charts from './components/Charts'
-import { Form, Input, Button, Select  } from 'antd';
+import { Form, Input, Select  } from 'antd';
 import { toJSON } from './utils/toJSON'
 import Series from './components/attributes/series';
 import XAxis from './components/attributes/xAxis';
@@ -48,13 +48,7 @@ function App() {
  
  
 
-  const onFinish = values => {
-    console.log('Success:', values);
-  }
-
-  const onFinishFailed = errorInfo => {
-    console.log('Failed:', errorInfo);
-  }
+ 
 
   const appenedStateAttribute = (attrs)=>{
     const newState = {...state}
@@ -83,27 +77,23 @@ function App() {
           <Charts option={ state }></Charts>
          <textarea value={toJSON(state)} readOnly style={{width:'100%'}} rows={12}></textarea>
         </Content>
-        <Sider width={600} theme="light" style={{padding:20,overflow:'auto'}}>
-        <Select
-          mode="multiple"
-          placeholder="Inserted are removed"
-          value={selectedAttrs}
-          onChange={handleSelectAttr}
-          style={{ width: '100%',marginBottom:20 }}
-        >
-          {filteredAttrs.map(item => (
-            <Select.Option key={item} value={item} >
-              {item}
-            </Select.Option>
-          ))}
-        </Select>
-        <Form
-          layout="vertical"
-          name="basic"
-          size="small"
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-        >
+        <Sider width={500} theme="light" style={{padding:20,overflow:'auto'}}>
+          <h2>Echarts配置项</h2>
+
+          <Select
+            mode="multiple"
+            placeholder="Inserted are removed"
+            value={selectedAttrs}
+            onChange={handleSelectAttr}
+            style={{ width: '100%',marginBottom:20 }}
+          >
+            {filteredAttrs.map(item => (
+              <Select.Option key={item} value={item} >
+                {item}
+              </Select.Option>
+            ))}
+          </Select>
+        
           { state.title && <Form.Item  label="标题"  name="title" >
             <Input type="text" value={state.title.text} onChange={handleTitleChange}/>
           </Form.Item>}
@@ -111,7 +101,7 @@ function App() {
           <XAxis state={state} setState={setState}></XAxis>
           <YAxis state={state} setState={setState}></YAxis>
           <Series appenedStateAttribute={appenedStateAttribute} state={state} setState={setState}></Series>
-        </Form>
+        {/* </Form> */}
         </Sider>
       </Layout>
       <Footer className="layout-footer">create by weizhanzhan</Footer>

@@ -1,5 +1,6 @@
 import React,{useState} from 'react'
 import { Form, Input, Button,Radio } from 'antd'
+import { RetweetOutlined } from '@ant-design/icons'
 const Series = (props)=>{
 
   const [ series ,setSeries ] = useState([])
@@ -75,62 +76,55 @@ const Series = (props)=>{
         data:serie.data
       })
     }
-    // const currentIndex = props.state.legend.data.indexOf(series.name)
-    // if(currentIndex !== -1){
-    //   newState.legend.data[currentIndex] = series.name
-    //   newState.series[currentIndex] = {
-    //     name:series.name,
-    //     type:series.type,
-    //     data:series.data
-    //   }
-    // }else{
-    //   newState.legend.data.push(series.name)
-    //   newState.series.push({
-    //     name:series.name,
-    //     type:series.type,
-    //     data:series.data
-    //   })
-    // }
+   
     props.setState(newState)
   }
+
+  const layout = {
+    labelCol: { span: 4 },
+    wrapperCol: { span: 20 },
+  };
   return (
-    <Form.Item label="数据series：" >
-      <div>
-      {
-        series.map((serie,index)=>{
-          return (
-            <div key={index} className="series-item">
-              {/* 加key是为了 react 重绘时 这个节点不会更新为新的节点 ，如果不设置 输入框输入一次就会失去焦点 */}
-              <Form.Item label="type"   >
-                <Radio.Group onChange={(e)=>{onTypeChange(e,index)}} value={serie.type}>
-                  <Radio value="line">折线图</Radio>
-                  <Radio value="bar">柱状图</Radio>
-                </Radio.Group>
-              </Form.Item>
-              <Form.Item label='name' >
-                <Input type="text" value={serie.name} onChange={(e)=>{handleBarSeriesChange(e,1,index)}}/>
-              </Form.Item>
-              <Form.Item label='data' >
-                <Input type="text" value={serie.data} onChange={(e)=>{handleBarSeriesChange(e,2,index)}}/>
-              </Form.Item>
-              <Button type="primary"  onClick={()=>{renderSeries(serie,index)}}>
-                更新到图表
-              </Button>
-              <Button type="danger" style={{marginLeft:12}}  onClick={()=>{deleteSeries(serie,index)}}>
-                移除
-              </Button>
-            </div>
-          )
-        })
-      }
-      </div>
-      <Button type="primary"  onClick={handleCreateSeries}>
-        添加一条数据
-      </Button>
-      {/* <Button type="primary"  onClick={()=>{handleCreateSeries('bar')}} style={{marginLeft:12}}>
-        添加一条柱状图
-      </Button> */}
-    </Form.Item>
+    <div>
+      <h3>series：</h3>
+      <Form {...layout} name="series" size="small" labelAlign="left">
+        <div>
+        {
+          series.map((serie,index)=>{
+            return (
+              <div key={index} className="series-item">
+                {/* 加key是为了 react 重绘时 这个节点不会更新为新的节点 ，如果不设置 输入框输入一次就会失去焦点 */}
+                <Form.Item label="type"   >
+                  <Radio.Group onChange={(e)=>{onTypeChange(e,index)}} value={serie.type}>
+                    <Radio value="line">折线图</Radio>
+                    <Radio value="bar">柱状图</Radio>
+                  </Radio.Group>
+                </Form.Item>
+                <Form.Item label='name' >
+                  <Input type="text" value={serie.name} onChange={(e)=>{handleBarSeriesChange(e,1,index)}}/>
+                </Form.Item>
+                <Form.Item label='data' >
+                  <Input type="text" value={serie.data} onChange={(e)=>{handleBarSeriesChange(e,2,index)}}/>
+                </Form.Item>
+                <Form.Item label='' >
+                  <Button type="primary"  onClick={()=>{renderSeries(serie,index)}} icon={ <RetweetOutlined/>}>
+                    更新
+                  </Button>
+                  <Button type="danger" style={{marginLeft:12}}  onClick={()=>{deleteSeries(serie,index)}}>
+                    移除
+                  </Button>
+                </Form.Item>
+               
+              </div>
+            )
+          })
+        }
+        </div>
+        <Button type="primary" style={{marginBottom:16}}  onClick={handleCreateSeries}>
+          添加series
+        </Button>
+      </Form>
+    </div>
   )
 }
 export default Series

@@ -1,5 +1,6 @@
 import React,{useState} from 'react'
 import { Form, Input, Button} from 'antd'
+import { RetweetOutlined } from '@ant-design/icons'
 const YAxis = (props)=>{
 
   const [ yAxis,setYAxis] = useState({
@@ -19,18 +20,28 @@ const YAxis = (props)=>{
     props.setState(newState)
   }
 
+  const layout = {
+    labelCol: { span: 4 },
+    wrapperCol: { span: 20 },
+  };
+
   return(
-    <Form.Item label="Y轴xAxis：" >
-      <div className="series-item">
-          <Form.Item label="name：" >
-            <Input type="text" value={yAxis.name} onChange={handleNameChange} placeholder="y轴名称"/>
-          </Form.Item>
-         
-          <Button type="primary"  onClick={renderYxAixs}>
-            更新到图表
-          </Button>
-      </div>
-    </Form.Item>
+    <div>
+      <h3>yAxis：</h3>
+      <Form {...layout} size="small" name="yAxis" labelAlign="left">
+          <div className="series-item">
+            <Form.Item label="name：" >
+              <Input type="text" value={yAxis.name} onChange={handleNameChange} placeholder="y轴名称"/>
+            </Form.Item>
+            <Form.Item label="" >
+              <Button type="primary"  onClick={renderYxAixs} icon={ <RetweetOutlined/>}>
+                更新
+              </Button>
+            </Form.Item>
+           
+        </div>
+      </Form>
+    </div>
   )
 }
 export default YAxis
